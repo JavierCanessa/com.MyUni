@@ -4,14 +4,18 @@
  */
 package Entidades;
 
-import java.util.Date;
+
 import java.util.List;
 import java.util.Random;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author tocho
- */
+*/
 public class Cliente {
     
     int rmd = new Random().nextInt();
@@ -19,6 +23,8 @@ public class Cliente {
     //private static int genrarId = rmd;
     
     private int id;
+    
+    private int cod;
     private String foto;
     private String nombre;
     private String apellido;
@@ -30,16 +36,15 @@ public class Cliente {
     private List<Procesos.enumProcesos> procesos;
     
     public Cliente() {
-      //  this.id = genrarId * 50 /30;
     }
     
-    public int getId() {
-        return id;
+    public int getCod() {
+        return cod;
     }
 
     public Cliente(String foto, String nombre, String apellido, String ciudad, String fechaNacimiento, int celular, String email, int pasaporte, List<Procesos.enumProcesos> procesos) {
         //this.id = genrarId++ * 506515 /3087;
-        this.id = rmd;
+        this.cod = rmd;
         this.foto = foto;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -125,8 +130,12 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + id + ", foto=" + foto + ", nombre=" + nombre + ", apellido=" + apellido + ", ciudad=" + ciudad + ", fechaNacimiento=" + fechaNacimiento + ", celular=" + celular + ", email=" + email + ", pasaporte=" + pasaporte + ", procesos=" + procesos + '}';
+        return "Cliente{" + "id=" + id + ", cod=" + cod + ", foto=" + foto + ", nombre=" + nombre + ", apellido=" + apellido + ", ciudad=" + ciudad + ", fechaNacimiento=" + fechaNacimiento + ", celular=" + celular + ", email=" + email + ", pasaporte=" + pasaporte + ", procesos=" + procesos + '}';
     }
+    
+    
+
+  
 
 
     

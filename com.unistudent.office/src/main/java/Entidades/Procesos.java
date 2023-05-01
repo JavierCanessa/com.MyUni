@@ -11,7 +11,22 @@ package Entidades;
  */
 public class Procesos {
     
-    public enum enumProcesos{ Proceso1, Proceso2, Proceso3, Proceso4, Proceso5, Proceso6 }
+    public enum enumProcesos{ 
+        Grupo_de_Whatsapp, 
+        Material_Estudio_CBC_Area_de_Salud, 
+        Convalidación_Titulo_Secundario, 
+        Compra_Pasajes_Aereos, 
+        Reserva_Alojamiento,
+        Recepción_Aeropuerto,
+        Entrega_Kit_Supervivencia,
+        Pago_Boletas,
+        Certificado_De_Domicilio,
+        Cita_DNI,
+        Precaria,
+        DNI_Resuelto,
+        Pre_inscripción,
+        Busqueda_Laboral
+    }
     
     
 }

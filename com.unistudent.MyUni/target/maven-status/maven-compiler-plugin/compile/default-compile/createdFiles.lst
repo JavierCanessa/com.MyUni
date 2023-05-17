@@ -1,0 +1,12 @@
+RepositorioInterfaz/ClienteDAO.class
+Servlets/InicioSession.class
+com/unistudent/office/AppMain.class
+RepositorioInterfaz/I_ClienteDAO.class
+utilidad/tabla/Tabla.class
+com/unistudent/office/resources/JakartaEE8Resource.class
+Tests/TestConnection.class
+Connectors/Connectors.class
+Tests/TestRepositorios.class
+Entidades/Procesos.class
+Entidades/Cliente.class
+com/unistudent/office/JakartaRestConfiguration.class

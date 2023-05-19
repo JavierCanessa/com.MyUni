@@ -123,7 +123,7 @@
 
             <h1  style="margin-bottom:100px" id="topPagina" >Administrador MyUni</h1>
 
-            <%  
+            <%                 
                 //out.println(    new TablaHtml().generarTabla(   cdao.findAll() )    );
             %>
 

@@ -4,9 +4,11 @@
  */
 package com.MyUni.MyUni.Entidades;
 
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -30,8 +32,6 @@ import javax.persistence.Transient;
 @Table(name = "clientes")
 public class Cliente {
 
-//    @Transient
-//    private int rmd = Math.abs(new Random().nextInt());
     @Id
     @Column(name = "id")
     private final int id = Math.abs(new Random().nextInt());
@@ -46,11 +46,18 @@ public class Cliente {
     private String email;
     private long pasaporte;
 
-    @ElementCollection(targetClass = Proceso.class)
+    @ElementCollection(targetClass = Proceso.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "cliente_procesos", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "procesos")
     private List<Proceso> procesos;
+
+    // Método para eliminar todos los procesos
+    public void eliminarTodosLosProcesos() {
+        if (procesos != null) {
+            procesos.clear();
+        }
+    }
 
     public Cliente() {
     }
@@ -139,7 +146,6 @@ public class Cliente {
         this.procesos = procesos;
     }
 
-    
     @Override
     public String toString() {
         return "Cliente{" + "id=" + id + ", foto=" + foto + ", nombres=" + nombres + ", apellidos=" + apellidos + ", ciudad=" + ciudad + ", fechaNacimiento=" + fechaNacimiento + ", celular=" + celular + ", email=" + email + ", pasaporte=" + pasaporte + ", procesos=" + procesos + '}';
@@ -148,7 +154,5 @@ public class Cliente {
     public int getId() {
         return id;
     }
-
-    
 
 }

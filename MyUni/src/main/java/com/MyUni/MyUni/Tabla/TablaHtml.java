@@ -6,6 +6,8 @@ package com.MyUni.MyUni.Tabla;
 
 import com.MyUni.MyUni.Dao.ClienteDAO;
 import com.MyUni.MyUni.Entidades.Cliente;
+import com.MyUni.MyUni.Entidades.Proceso;
+import java.lang.reflect.Field;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,30 +15,27 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author tocho
  */
+
 public class TablaHtml {
-@Autowired
-ClienteDAO cdao;
 
-    public String generarTabla() {
-        List<Cliente> clientes = cdao.findAll();
-
+    public String generarTabla(List<Cliente> clientes) {
         StringBuilder tabla = new StringBuilder();
         tabla.append("<table class=\"table\">\n");
-        tabla.append("<thead class=`thead-dark`>"
-                + "<tr>"
-                + "<th scope=\"col\" >Código</th>"
-                + "<th scope=\"col\" >Foto</th>"
-                + "<th scope=\"col\" >Nombres</th>"
-                + "<th scope=\"col\" >Apellidos</th>"
-                + "<th scope=\"col\" >Ciudad</th>"
-                + "<th scope=\"col\" >Fecha de Nacimiento</th>"
-                + "<th scope=\"col\" >Celular</th>"
-                + "<th scope=\"col\" >Email</th>"
-                + "<th scope=\"col\">Pasaporte</th>"
-                + "<th scope=\"col\">Procesos</th>"
-                + "<th scope=\"col\">LINKS</th>"
-                + "</tr>"
-                + "</thead>\n");
+        tabla.append("<thead class=\"thead-dark\">");
+        tabla.append("<tr>");
+        tabla.append("<th scope=\"col\">Código</th>");
+        tabla.append("<th scope=\"col\">Foto</th>");
+        tabla.append("<th scope=\"col\">Nombres</th>");
+        tabla.append("<th scope=\"col\">Apellidos</th>");
+        tabla.append("<th scope=\"col\">Ciudad</th>");
+        tabla.append("<th scope=\"col\">Fecha de Nacimiento</th>");
+        tabla.append("<th scope=\"col\">Celular</th>");
+        tabla.append("<th scope=\"col\">Email</th>");
+        tabla.append("<th scope=\"col\">Pasaporte</th>");
+        tabla.append("<th scope=\"col\">Procesos</th>");
+        tabla.append("<th scope=\"col\">LINKS</th>");
+        tabla.append("</tr>");
+        tabla.append("</thead>\n");
 
         for (Cliente cliente : clientes) {
             tabla.append("<tr>");
@@ -49,7 +48,16 @@ ClienteDAO cdao;
             tabla.append("<td>").append(cliente.getCelular()).append("</td>");
             tabla.append("<td>").append(cliente.getEmail()).append("</td>");
             tabla.append("<td>").append(cliente.getPasaporte()).append("</td>");
-            tabla.append("<td>").append(cliente.getProcesos()).append("</td>");
+
+            tabla.append("<td>");
+            tabla.append("<select>");
+            for (Proceso proceso : cliente.getProcesos()) {
+                tabla.append("<option>").append(proceso).append("</option>");
+            }
+            tabla.append("</select>");
+            tabla.append("</td>");
+
+            tabla.append("<td>LINKS</td>");
             tabla.append("</tr>\n");
         }
 

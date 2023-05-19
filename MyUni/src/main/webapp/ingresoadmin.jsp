@@ -1,6 +1,10 @@
-<%@page import="com.MyUni.MyUni.Tabla.TablaHtml"%>
-<%@page import="org.springframework.beans.factory.annotation.Autowired"%>
 <%@page import="com.MyUni.MyUni.Dao.ClienteDAO"%>
+<%@page import="org.springframework.beans.factory.annotation.Autowired"%>
+<%@page import="com.MyUni.MyUni.Tabla.TablaHtml"%>
+<%@page import="com.MyUni.MyUni.Entidades.Cliente" %>
+<%! @Autowired
+    private ClienteDAO cdao;
+%>
 <!doctype html>
 <html class="no-js" lang="es">
 
@@ -63,13 +67,15 @@
     <body>
         <%
             //HttpSession session=request.getSession();
-            boolean xSession = false;
-            try {
-                xSession = (boolean) session.getAttribute("session");
-            } catch (Exception e) {
-            }
-            if (!xSession)
-                response.sendRedirect("sinsesion.html");
+
+//                boolean xSession = false;
+//                try {
+//                xSession = (boolean) session.getAttribute("session");
+//             } catch (Exception e) {
+//             }
+//                if (!xSession)
+//                response.sendRedirect("sinsesion.html");
+
         %>
         <link rel="stylesheet" href="assets/whatsappbotonflotante/whats.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -120,8 +126,8 @@
 
             <h1  style="margin-bottom:100px" id="topPagina" >Administrador MyUni</h1>
 
-            <%
-               // out.println(new TablaHtml().generarTabla());
+            <%  
+                out.println(    new TablaHtml().generarTabla(   cdao.findAll() )    );
             %>
 
 

@@ -5,15 +5,13 @@
 package com.MyUni.MyUni.Dao;
 
 import com.MyUni.MyUni.Entidades.Cliente;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author tocho
  */
-@Repository
-public interface ClienteDAO  extends JpaRepository<Cliente, Integer>{
+public interface ClienteDAO  extends JpaRepository<Cliente, Integer> {
     
 }

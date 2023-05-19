@@ -2,9 +2,6 @@
 <%@page import="org.springframework.beans.factory.annotation.Autowired"%>
 <%@page import="com.MyUni.MyUni.Tabla.TablaHtml"%>
 <%@page import="com.MyUni.MyUni.Entidades.Cliente" %>
-<%! @Autowired
-    private ClienteDAO cdao;
-%>
 <!doctype html>
 <html class="no-js" lang="es">
 
@@ -127,7 +124,7 @@
             <h1  style="margin-bottom:100px" id="topPagina" >Administrador MyUni</h1>
 
             <%  
-                out.println(    new TablaHtml().generarTabla(   cdao.findAll() )    );
+                //out.println(    new TablaHtml().generarTabla(   cdao.findAll() )    );
             %>
 
 

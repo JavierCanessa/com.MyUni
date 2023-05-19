@@ -8,9 +8,7 @@
 <%@page import="com.MyUni.MyUni.Entidades.Cliente"%>
 <%@page import="org.springframework.beans.factory.annotation.Autowired"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%! @Autowired
-    private ClienteDAO cdao;
-%>
+<% ClienteDAO cdao = (ClienteDAO) request.getAttribute("clienteDAO"); %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,28 +21,9 @@
             if (cdao != null) {
                 out.print(cdao.findAll().getClass());
             } else {
-                out.print("cdao is null");
+                out.print("cdao is null2");
             }
-            //out.print( cdao.findAll().getClass() );
         %>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (Cliente cliente : clientes) {%>
-                <tr>
-                    <td><%= cliente.getId()%></td>
-                    <td><%= cliente.getNombres()%></td>
-                    <td><%= cliente.getEmail()%></td>
-                </tr>
-                <% }%>
-            </tbody>
-        </table>
     </body>
 </html>

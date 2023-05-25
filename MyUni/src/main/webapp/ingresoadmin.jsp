@@ -1,7 +1,10 @@
-<%@page import="com.MyUni.MyUni.Dao.ClienteDAO"%>
-<%@page import="org.springframework.beans.factory.annotation.Autowired"%>
 <%@page import="com.MyUni.MyUni.Tabla.TablaHtml"%>
+<%@page import="com.MyUni.MyUni.Dao.ClienteDAO"%>
 <%@page import="com.MyUni.MyUni.Entidades.Cliente" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.net.HttpURLConnection, java.net.URL, java.io.BufferedReader, java.io.InputStreamReader" %>
+
+
 <!doctype html>
 <html class="no-js" lang="es">
 
@@ -104,7 +107,7 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="active"><a  target="_blank" href="index.html">HomeWebNormal</a></li>
-                                <li class="active"><a href="logout.jsp">Cerrar Sesi�n</a></li>
+                                <li class="active"><a href="logout.jsp">Cerrar Sesión</a></li>
                             </ul><!-- / ul -->
                         </div><!-- /.navbar-collapse -->
                     </nav>
@@ -123,8 +126,36 @@
 
             <h1  style="margin-bottom:100px" id="topPagina" >Administrador MyUni</h1>
 
-            <%                 
-                //out.println(    new TablaHtml().generarTabla(   cdao.findAll() )    );
+
+            <%    
+                String url = "http://localhost:8084/myuni/clientes/all";
+                HttpURLConnection connection = null;
+
+                try {
+                    // Establecer la conexión
+                    URL apiUrl = new URL(url);
+                    connection = (HttpURLConnection) apiUrl.openConnection();
+                    connection.setRequestMethod("GET");
+
+                    // Leer la respuesta
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder response = new StringBuilder(); // Variable response
+
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                    reader.close();
+
+                    // Mostrar la respuesta en la página JSP
+                    out.println("Respuesta del servicio web: " + response.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (connection != null) {
+                        connection.disconnect();
+                    }
+                }
             %>
 
 

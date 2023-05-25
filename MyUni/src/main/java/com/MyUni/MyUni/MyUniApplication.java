@@ -3,18 +3,21 @@ package com.MyUni.MyUni;
 import com.MyUni.MyUni.Dao.ClienteDAO;
 import com.MyUni.MyUni.Entidades.Cliente;
 import com.MyUni.MyUni.Entidades.Proceso;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @SpringBootApplication
 public class MyUniApplication implements CommandLineRunner {
 
     @Autowired
-    ClienteDAO cdao;
+    private ClienteDAO cdao;
 
     public static void main(String[] args) {
         SpringApplication.run(MyUniApplication.class, args);
@@ -22,8 +25,10 @@ public class MyUniApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("********** Bienvenido a MyUni **********");
-
+        
+        System.out.println("*************MyUni App************************");
+        System.out.println("Estos son los datos de la DB: ");
+        
         /*Creamos lista de procesos*/
         List<Proceso> plista1 = new ArrayList<>();
         plista1.add(Proceso.Precaria);
@@ -70,7 +75,8 @@ public class MyUniApplication implements CommandLineRunner {
 
 
        // System.out.println( cdao.findById(799949785).orElse(null).getProcesos() );
-        //System.out.println(cdao.findAll());
+
+        //System.out.println("Por Id : " + cdao.findById(1962779091));
     }
 
 }

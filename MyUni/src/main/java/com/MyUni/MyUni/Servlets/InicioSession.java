@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.MyUni.MyUni.servlets;
+package com.MyUni.MyUni.Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -93,7 +93,7 @@ public class InicioSession extends HttpServlet {
                 session.setAttribute("session", false);
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Contraseña incorrecta');");
-                out.println("location='indexInicio.jsp';");
+                out.println("location='ingresoadmin.jsp';");
                 out.println("</script>");
             }
         }    }

@@ -1,20 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-   version="4.0">  
-    
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
     <welcome-file-list>
         <welcome-file>indexInicio.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
+        <servlet-name>Calculadora</servlet-name>
+        <servlet-class>com.MyUni.MyUni.Servlets.ServicioCalculadora</servlet-class>
+        <init-param>
+            <param-name>nro1</param-name>
+            <param-value>0</param-value>
+        </init-param>
+        <init-param>
+            <param-name>nro2</param-name>
+            <param-value>0</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Calculadora</servlet-name>
+        <url-pattern>/Calculadora</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>mostrarclientes</servlet-name>
+        <servlet-class>com.MyUni.MyUni.Servlets.ServicioClientes</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mostrarclientes</servlet-name>
+        <url-pattern>/mostrarclientes</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+    
+    
+    <servlet>
         <servlet-name>InicioSession</servlet-name>
-        <servlet-class>com.MyUni.MyUni.servlets.InicioSession</servlet-class>
+        <servlet-class>com.MyUni.MyUni.Servlets.InicioSession</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>InicioSession</servlet-name>
         <url-pattern>/InicioSession</url-pattern>
     </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
@@ -24,5 +52,4 @@
         <error-code>404</error-code>
         <location>/error.html</location>
     </error-page>
-    
 </web-app>

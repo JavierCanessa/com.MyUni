@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Calculadora</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>Calculadora</div>
+        <form>
+            Número 1: <input type="text" name="nro1" id="nro1" /><br>
+            Número 2: <input type="text" name="nro2" id="nro2" /><br>
+            <input type="reset" value="borrar"/>
+            <input type="button" value="enviar" onclick="realizarProceso()"/>
+        </form>
+        <div id="resultado"></div>
+        <script>
+            var ajax;
+            function realizarProceso() {
+                url = 'http://localhost:8084/myuni/Calculadora?nro1=' 
+                        + document.getElementById('nro1').value+'&nro2='
+                        + document.getElementById('nro2').value;
+                console.log('url=', url);
+                ajax = new XMLHttpRequest();
+                ajax.addEventListener('load', cargarValores);
+                ajax.open('GET', url);
+                ajax.send();
+            }
+            function cargarValores() {
+                document.getElementById('resultado').innerHTML = ajax.response;
+            }
+        </script>
+
+    </body>
+</html>

@@ -1,6 +1,7 @@
 <%@page import="com.MyUni.MyUni.Tabla.TablaHtml"%>
 <%@page import="com.MyUni.MyUni.Dao.ClienteDAO"%>
 <%@page import="com.MyUni.MyUni.Entidades.Cliente" %>
+<%@page import="com.MyUni.MyUni.Entidades.Proceso" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.net.HttpURLConnection, java.net.URL, java.io.BufferedReader, java.io.InputStreamReader" %>
 
@@ -122,41 +123,139 @@
 
 
         <!--Tabla-->
-        <section  style="padding: 40px 20px 200px 20px " id="Nosotros" class="about-us">
+        <section  style="padding: 40px 20px 100px 20px ;margin-bottom: 200px" id="Nosotros" class="about-us">
 
             <h1  style="margin-bottom:100px" id="topPagina" >Administrador MyUni</h1>
 
 
-            <%    
-                String url = "http://localhost:8084/myuni/clientes/all";
-                HttpURLConnection connection = null;
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal1">Tabla Completa</button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal2">Agregar</button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal3">Modificar/Eliminar</button>
+                    </div>
+                </div>
+            </div>
 
-                try {
-                    // Establecer la conexión
-                    URL apiUrl = new URL(url);
-                    connection = (HttpURLConnection) apiUrl.openConnection();
-                    connection.setRequestMethod("GET");
+            <!-- Modal 1 -->
+            <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal1Label">Tabla Completa</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Contenido del Modal 1
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    // Leer la respuesta
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    StringBuilder response = new StringBuilder(); // Variable response
+            <!-- Modal 2 -->
+            <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modal2Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal2Label">Agregar Usuario</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="http://localhost:8084/myuni/clientes/agregar" method="post">
+                                <div class="form-group">
+                                    <label for="foto">Foto:</label>
+                                    <input type="text" class="form-control" id="foto" name="foto">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombres">Nombres:</label>
+                                    <input type="text" class="form-control" id="nombres" name="nombres">
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellidos">Apellidos:</label>
+                                    <input type="text" class="form-control" id="apellidos" name="apellidos">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ciudad">Ciudad:</label>
+                                    <input type="text" class="form-control" id="ciudad" name="ciudad">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                                    <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento">
+                                </div>
+                                <div class="form-group">
+                                    <label for="celular">Celular:</label>
+                                    <input type="text" class="form-control" id="celular" name="celular">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email" name="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pasaporte">Pasaporte:</label>
+                                    <input type="text" class="form-control" id="pasaporte" name="pasaporte">
+                                </div>
 
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
-                    reader.close();
+                                <!--Lista de procesos-->
+                                <div class="form-group">
+                                    <label for="procesos">Procesos:</label>
+                                    <% for (Proceso proceso : Proceso.values()) {%>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="proceso_<%= proceso.getId()%>" name="procesos" value="<%= proceso.getId()%>">
+                                        <label class="form-check-label" for="proceso_<%= proceso.getId()%>"><%= proceso%></label>
+                                    </div>
+                                    <% }%>
+                                </div>
 
-                    // Mostrar la respuesta en la página JSP
-                    out.println("Respuesta del servicio web: " + response.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    if (connection != null) {
-                        connection.disconnect();
-                    }
-                }
-            %>
+                                <!--Intento pasar String a Lista-->
+                                <input type="hidden" id="procesosHidden" name="procesos">
+                                <script>
+                                    function handleFormSubmit() {
+                                        var selectedProcesos = [];
+                                        var checkboxes = document.querySelectorAll('input[name="procesos"]:checked');
+                                        checkboxes.forEach(function (checkbox) {
+                                            selectedProcesos.push(checkbox.value);
+                                        });
+                                        document.getElementById("procesosHidden").value = selectedProcesos.join(",");
+                                    }
+                                </script>
+
+
+                                <!--Fin Lista de procesos-->
+
+                                <button type="submit" class="btn btn-primary" onclick="handleFormSubmit()">Guardar</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal 3 -->
+            <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="modal2Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal3Label">Modificar/Eliminar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Contenido del Modal 3
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 

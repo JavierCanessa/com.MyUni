@@ -6,11 +6,17 @@ package com.MyUni.MyUni.Controller;
 
 import com.MyUni.MyUni.Dao.ClienteDAO;
 import com.MyUni.MyUni.Entidades.Cliente;
+import com.MyUni.MyUni.Entidades.Proceso;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,26 +25,51 @@ import org.springframework.web.bind.annotation.RestController;
  * @author tocho
  */
 @RestController
-@RequestMapping(path="/clientes")
+@RequestMapping(path = "/clientes")
 public class ClienteController {
-    
+
     @Autowired
     private ClienteDAO cdao;
-    
-    @GetMapping( "/all" )
-    public List<Cliente> all(){
+
+    @GetMapping("/all")
+    public List<Cliente> all() {
         return cdao.findAll();
     }
-    
+
     @GetMapping("busqueda/{id}")
-    public Optional<Cliente> busquedaId( @PathVariable int id ){
+    public Optional<Cliente> busquedaId(@PathVariable int id) {
         return cdao.findById(id);
     }
-    
+
     @GetMapping("eliminar/{id}")
-    public String eliminar( @PathVariable int id ){
-        cdao.deleteById(id);
+    public String eliminar(@PathVariable int id) {
+        Optional<Cliente> oc = cdao.findById(id);
+        Cliente c = oc.orElse(null);
+        c.eliminarTodosLosProcesos();
+        cdao.delete(c);
         return "id : " + id + " " + "eliminado";
     }
-    
+
+    @PostMapping("/agregar")
+    public ResponseEntity<String> agregarCliente(@ModelAttribute Cliente cliente) {
+        try {
+
+            String foto = cliente.getFoto();
+            String nombres = cliente.getNombres();
+            String apellidos = cliente.getApellidos();
+            String ciudad = cliente.getCiudad();
+            String fechaNacimiento = cliente.getFechaNacimiento();
+            long celular = cliente.getCelular();
+            String email = cliente.getEmail();
+            long pasaporte = cliente.getPasaporte();
+            List<Proceso> procesos = cliente.getProcesos();
+            
+            cdao.save(cliente);
+
+            return ResponseEntity.ok("Cliente agregado: " + " " + cliente.getId() + " " + nombres + " " + apellidos);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al agregar el cliente");
+        }
+    }
+
 }

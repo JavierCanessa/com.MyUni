@@ -7,8 +7,10 @@ package com.MyUni.MyUni.Controller;
 import com.MyUni.MyUni.Dao.ClienteDAO;
 import com.MyUni.MyUni.Entidades.Cliente;
 import com.MyUni.MyUni.Entidades.Proceso;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -51,9 +54,8 @@ public class ClienteController {
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<String> agregarCliente(@ModelAttribute Cliente cliente) {
+    public ResponseEntity<String> agregarCliente(@RequestParam("procesos") String[] procesos, @ModelAttribute Cliente cliente) {
         try {
-
             String foto = cliente.getFoto();
             String nombres = cliente.getNombres();
             String apellidos = cliente.getApellidos();
@@ -62,11 +64,17 @@ public class ClienteController {
             long celular = cliente.getCelular();
             String email = cliente.getEmail();
             long pasaporte = cliente.getPasaporte();
-            List<Proceso> procesos = cliente.getProcesos();
-            
+
+            List<Proceso> listaProcesos = Arrays.stream(procesos)
+                    .map(Integer::valueOf)
+                    .map(id -> Proceso.values()[id])
+                    .collect(Collectors.toList());
+
+            cliente.setProcesos(listaProcesos);
+
             cdao.save(cliente);
 
-            return ResponseEntity.ok("Cliente agregado: " + " " + cliente.getId() + " " + nombres + " " + apellidos);
+            return ResponseEntity.ok("Cliente agregado: " + cliente.getId() + " " + nombres + " " + apellidos);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al agregar el cliente");
         }

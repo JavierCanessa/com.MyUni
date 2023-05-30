@@ -173,65 +173,55 @@
                             <form action="http://localhost:8084/myuni/clientes/agregar" method="post">
                                 <div class="form-group">
                                     <label for="foto">Foto:</label>
-                                    <input type="text" class="form-control" id="foto" name="foto">
+                                    <input type="text" class="form-control" id="foto" name="foto" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="nombres">Nombres:</label>
-                                    <input type="text" class="form-control" id="nombres" name="nombres">
+                                    <input type="text" class="form-control" id="nombres" name="nombres" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="apellidos">Apellidos:</label>
-                                    <input type="text" class="form-control" id="apellidos" name="apellidos">
+                                    <input type="text" class="form-control" id="apellidos" name="apellidos" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="ciudad">Ciudad:</label>
-                                    <input type="text" class="form-control" id="ciudad" name="ciudad">
+                                    <input type="text" class="form-control" id="ciudad" name="ciudad" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-                                    <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento">
+                                    <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="celular">Celular:</label>
-                                    <input type="text" class="form-control" id="celular" name="celular">
+                                    <input type="text" class="form-control" id="celular" name="celular" required pattern="[0-9]+">
+                                    <small class="form-text text-muted">Ingrese solo números.</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email">
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <small class="form-text text-muted">Ingrese un formato de correo válido.</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="pasaporte">Pasaporte:</label>
-                                    <input type="text" class="form-control" id="pasaporte" name="pasaporte">
+                                    <input type="text" class="form-control" id="pasaporte" name="pasaporte" required pattern="[0-9]+">
+                                    <small class="form-text text-muted">Ingrese solo números.</small>
                                 </div>
 
-                                <!--Lista de procesos-->
+                                <!-- Lista de procesos -->
                                 <div class="form-group">
                                     <label for="procesos">Procesos:</label>
                                     <% for (Proceso proceso : Proceso.values()) {%>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="proceso_<%= proceso.getId()%>" name="procesos" value="<%= proceso.getId()%>">
+                                        <input class="form-check-input" type="checkbox" id="proceso_<%= proceso.getId()%>" name="procesos[]" value="<%= proceso.getId()%>">
                                         <label class="form-check-label" for="proceso_<%= proceso.getId()%>"><%= proceso%></label>
+
                                     </div>
                                     <% }%>
                                 </div>
-
-                                <!--Intento pasar String a Lista-->
-                                <input type="hidden" id="procesosHidden" name="procesos">
-                                <script>
-                                    function handleFormSubmit() {
-                                        var selectedProcesos = [];
-                                        var checkboxes = document.querySelectorAll('input[name="procesos"]:checked');
-                                        checkboxes.forEach(function (checkbox) {
-                                            selectedProcesos.push(checkbox.value);
-                                        });
-                                        document.getElementById("procesosHidden").value = selectedProcesos.join(",");
-                                    }
-                                </script>
-
-
-                                <!--Fin Lista de procesos-->
+                                <!-- Fin Lista de procesos -->
 
                                 <button type="submit" class="btn btn-primary" onclick="handleFormSubmit()">Guardar</button>
+                                <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
 
                             </form>
                         </div>
@@ -343,7 +333,7 @@
         <script type="text/javascript" src="assets/js/custom.js"></script>
 
         <!--tochjs.js-->
-        <script type="text/javascript" src="assets/js/toch.js"></script>
+        <script type="text/javascript" src="assets/js/Toch.js"></script>
 
 
     </body>

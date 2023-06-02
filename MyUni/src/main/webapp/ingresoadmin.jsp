@@ -283,8 +283,50 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            Contenido del Modal 3
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="codigoCliente" placeholder="Ingrese el código del cliente">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary" id="btnBuscarCliente">Buscar</button>
+                            </div>
+
+                            <div id="clienteInfo">
+                                <!-- Aquí se mostrarán los datos del cliente -->
+                            </div>
                         </div>
+
+                        <script>
+                            document.getElementById('btnBuscarCliente').addEventListener('click', function () {
+                                const clienteId = document.getElementById('codigoCliente').value;
+
+                                fetch(`http://localhost:8084/myuni/clientes/buscar/${clienteId}`)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            const clienteInfo = document.getElementById('clienteInfo');
+                                    console.log(data);
+
+                                            if (data) {
+                                                // Mostrar los datos del cliente en el elemento #clienteInfo
+                                                clienteInfo.innerHTML = `
+                                    <h3>Datos del Cliente</h3>
+                                    <p>ID: ${data.id}</p>
+                                    <p>Nombre: ${data.nombre}</p>
+                                    <p>Apellido: ${data.apellido}</p>
+                                    <!-- Agrega aquí más campos del cliente que deseas mostrar -->
+                                  `;
+                                            } else {
+                                                // No se encontró el cliente, mostrar un mensaje de error
+                                                clienteInfo.innerHTML = '<p>No se encontró el cliente.</p>';
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error('Error en la solicitud:', error);
+                                        });
+                            });
+                        </script>
+
                     </div>
                 </div>
             </div>

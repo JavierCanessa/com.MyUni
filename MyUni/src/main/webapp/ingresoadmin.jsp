@@ -212,7 +212,8 @@
                                     <label for="procesos">Procesos:</label>
                                     <% for (Proceso proceso : Proceso.values()) {%>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="proceso_<%= proceso.getId()%>" name="procesos[]" value="<%= proceso.getId()%>">
+                                        <input class="form-check-input" type="checkbox" id="proceso_<%= proceso.getId()%>" name="procesos" value="<%= proceso.name()%>">
+
                                         <label class="form-check-label" for="proceso_<%= proceso.getId()%>"><%= proceso%></label>
 
                                     </div>

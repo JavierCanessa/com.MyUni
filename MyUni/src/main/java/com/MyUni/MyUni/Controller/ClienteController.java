@@ -7,6 +7,7 @@ package com.MyUni.MyUni.Controller;
 import com.MyUni.MyUni.Dao.ClienteDAO;
 import com.MyUni.MyUni.Entidades.Cliente;
 import com.MyUni.MyUni.Entidades.Proceso;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +39,7 @@ public class ClienteController {
         return cdao.findAll();
     }
 
-    @GetMapping("busqueda/{id}")
+    @GetMapping("buscar/{id}")
     public Optional<Cliente> busquedaId(@PathVariable int id) {
         return cdao.findById(id);
     }
@@ -54,7 +54,7 @@ public class ClienteController {
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<String> agregarCliente(@RequestParam("procesos") String[] procesos, @ModelAttribute Cliente cliente) {
+    public ResponseEntity<String> agregarCliente(@RequestParam("procesos") List<String> procesosTextos, @ModelAttribute Cliente cliente) {
         try {
             String foto = cliente.getFoto();
             String nombres = cliente.getNombres();
@@ -65,10 +65,12 @@ public class ClienteController {
             String email = cliente.getEmail();
             long pasaporte = cliente.getPasaporte();
 
-            List<Proceso> listaProcesos = Arrays.stream(procesos)
-                    .map(Integer::valueOf)
-                    .map(id -> Proceso.values()[id])
-                    .collect(Collectors.toList());
+            List<Proceso> listaProcesos = new ArrayList<>();
+
+            for (String procesoTexto : procesosTextos) {
+                Proceso proceso = Proceso.valueOf(procesoTexto); // Obtener el proceso correspondiente al texto
+                listaProcesos.add(proceso); // Agregar el proceso a la lista
+            }
 
             cliente.setProcesos(listaProcesos);
 

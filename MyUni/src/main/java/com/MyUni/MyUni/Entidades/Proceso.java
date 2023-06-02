@@ -49,4 +49,13 @@ public enum Proceso {
         return id;
     }
     
+    public static Proceso getValor(int id) {
+        for (Proceso proceso : values()) {
+            if (proceso.getId() == id) {
+                return proceso;
+            }
+        }
+        throw new IllegalArgumentException("ID de proceso inválido: " + id);
+    }
+    
 }

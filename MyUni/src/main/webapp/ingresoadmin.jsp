@@ -170,7 +170,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="http://localhost:8084/myuni/clientes/agregar" method="post">
+                            <form id="formularioAgregar" >
                                 <div class="form-group">
                                     <label for="foto">Foto:</label>
                                     <input type="text" class="form-control" id="foto" name="foto" required>
@@ -221,8 +221,51 @@
                                 </div>
                                 <!-- Fin Lista de procesos -->
 
-                                <button type="submit" class="btn btn-primary" onclick="handleFormSubmit()">Guardar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
                                 <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
+                                <div id="popup" style="display: none;">
+                                    <p id="mensaje"></p>
+                                    <button id="okButton">OK</button>
+                                </div>
+
+                                <!--tochjs.js-->
+                                <script>
+                                    // Agregar controlador de eventos para el evento "submit" del formulario
+                                    document.getElementById('formularioAgregar').addEventListener('submit', handleFormSubmit);
+
+                                    function handleFormSubmit(event) {
+                                        event.preventDefault(); // Evitar la recarga de la página por defecto
+
+                                        fetch('http://localhost:8084/myuni/clientes/agregar', {
+                                            method: 'POST',
+                                            body: new FormData(document.getElementById('formularioAgregar'))
+                                        })
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    console.log(data);
+                                                    if (data.agregado) {
+                                                        const mensaje = data.mensaje;
+                                                        const clienteNombre = mensaje.split(':')[1].trim();
+
+                                                        // Mostrar mensaje emergente de cliente agregado utilizando alert
+                                                        const mensajeAlert = `Cliente agregado: ${clienteNombre}`;
+                                                        alert(mensajeAlert);
+
+                                                        // Imprimir datos del cliente en la consola
+                                                        console.log('Datos del cliente:', clienteNombre);
+
+                                                        // Limpiar formulario y URL después de mostrar el mensaje
+                                                        document.getElementById('formularioAgregar').reset();
+                                                        window.history.replaceState({}, document.title, 'http://localhost:8084/myuni/ingresoadmin.jsp');
+                                                    } else {
+                                                        console.error('Error al agregar el cliente:', data.mensaje);
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error en la solicitud:', error);
+                                                });
+                                    }
+                                </script>
 
                             </form>
                         </div>
@@ -252,8 +295,6 @@
 
 
         </section>
-        <!--/.about-us-->
-        <!--about-us end -->
 
         <!-- footer-copyright start -->
         <footer class="footer-copyright">

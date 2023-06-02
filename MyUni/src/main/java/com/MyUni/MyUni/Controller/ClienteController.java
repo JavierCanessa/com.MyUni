@@ -9,7 +9,9 @@ import com.MyUni.MyUni.Entidades.Cliente;
 import com.MyUni.MyUni.Entidades.Proceso;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +56,8 @@ public class ClienteController {
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<String> agregarCliente(@RequestParam("procesos") List<String> procesosTextos, @ModelAttribute Cliente cliente) {
+    public Map<String, Object> agregarCliente(@RequestParam("procesos") List<String> procesosTextos, @ModelAttribute Cliente cliente) {
+        Map<String, Object> response = new HashMap<>();
         try {
             String foto = cliente.getFoto();
             String nombres = cliente.getNombres();
@@ -76,9 +79,15 @@ public class ClienteController {
 
             cdao.save(cliente);
 
-            return ResponseEntity.ok("Cliente agregado: " + cliente.getId() + " " + nombres + " " + apellidos);
+            response.put("agregado", true);
+            response.put("mensaje", "Cliente agregado: " + cliente.getId() + " " + nombres + " " + apellidos);
+
+            return response;
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al agregar el cliente");
+            response.put("agregado", false);
+            response.put("mensaje", "Error al agregar el cliente");
+
+            return response;
         }
     }
 

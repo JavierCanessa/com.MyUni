@@ -78,8 +78,7 @@ public class MyUniApplication implements CommandLineRunner {
 
         //System.out.println("Por Id : " + cdao.findById(1962779091));
         //System.out.println(cdao.findById(1962779091));
-        Proceso p = null ;
-        System.out.println("id de precaria: " +p.Precaria.getId());
+        
     }
 
 }

@@ -245,18 +245,16 @@
                                                     console.log(data);
                                                     if (data.agregado) {
                                                         const mensaje = data.mensaje;
-                                                        const clienteNombre = mensaje.split(':')[1].trim();
 
                                                         // Mostrar mensaje emergente de cliente agregado utilizando alert
-                                                        const mensajeAlert = `Cliente agregado: ${clienteNombre}`;
-                                                        alert(mensajeAlert);
-
-                                                        // Imprimir datos del cliente en la consola
-                                                        console.log('Datos del cliente:', clienteNombre);
+                                                        //const mensajeAlert = `Cliente agregado` + data.mensaje;
+                                                        alert(mensaje);
 
                                                         // Limpiar formulario y URL después de mostrar el mensaje
-                                                        document.getElementById('formularioAgregar').reset();
-                                                        window.history.replaceState({}, document.title, 'http://localhost:8084/myuni/ingresoadmin.jsp');
+                                                        setTimeout(() => {
+                                                            document.getElementById('formularioAgregar').reset();
+                                                            window.history.replaceState({}, document.title, 'http://localhost:8084/myuni/ingresoadmin.jsp');
+                                                        }, 100);
                                                     } else {
                                                         console.error('Error al agregar el cliente:', data.mensaje);
                                                     }

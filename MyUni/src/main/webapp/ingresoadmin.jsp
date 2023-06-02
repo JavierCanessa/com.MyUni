@@ -300,20 +300,22 @@
                         <script>
                             document.getElementById('btnBuscarCliente').addEventListener('click', function () {
                                 const clienteId = document.getElementById('codigoCliente').value;
+                                console.log(clienteId);
 
-                                fetch(`http://localhost:8084/myuni/clientes/buscar/${clienteId}`)
+                                fetch(`http://localhost:8084/myuni/clientes/buscar/` + clienteId)
                                         .then(response => response.json())
                                         .then(data => {
                                             const clienteInfo = document.getElementById('clienteInfo');
-                                    console.log(data);
+                                            console.log(data);
 
                                             if (data) {
                                                 // Mostrar los datos del cliente en el elemento #clienteInfo
                                                 clienteInfo.innerHTML = `
+                                    <br>                
                                     <h3>Datos del Cliente</h3>
                                     <p>ID: ${data.id}</p>
-                                    <p>Nombre: ${data.nombre}</p>
-                                    <p>Apellido: ${data.apellido}</p>
+                                    <p>Nombre: ${data.nombres}</p>
+                                    <p>Apellido: ${data.apellidos}</p>
                                     <!-- Agrega aquí más campos del cliente que deseas mostrar -->
                                   `;
                                             } else {

@@ -42,8 +42,18 @@ public class ClienteController {
     }
 
     @GetMapping("buscar/{id}")
-    public Optional<Cliente> busquedaId(@PathVariable int id) {
-        return cdao.findById(id);
+    public ResponseEntity<?> busquedaId(@PathVariable String id) {
+        try {
+            int clienteId = Integer.parseInt(id);
+            Optional<Cliente> cliente = cdao.findById(clienteId);
+            if (cliente.isPresent()) {
+                return ResponseEntity.ok(cliente.get());
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (NumberFormatException e) {
+            return ResponseEntity.badRequest().body("El código del cliente debe ser un número válido o no existe el codigo");
+        }
     }
 
     @GetMapping("eliminar/{id}")

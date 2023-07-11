@@ -33,7 +33,7 @@ import javax.persistence.Transient;
 public class Cliente {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", updatable = false)
     private final int id = Math.abs(new Random().nextInt());
     ;
 

@@ -1,5 +1,6 @@
 package com.MyUni.MyUni;
 
+import com.MyUni.MyUni.Controller.ClienteController;
 import com.MyUni.MyUni.Dao.ClienteDAO;
 import com.MyUni.MyUni.Entidades.Cliente;
 import com.MyUni.MyUni.Entidades.Proceso;
@@ -18,6 +19,9 @@ public class MyUniApplication implements CommandLineRunner {
 
     @Autowired
     private ClienteDAO cdao;
+    
+    @Autowired
+    private ClienteController cr;
 
     public static void main(String[] args) {
         SpringApplication.run(MyUniApplication.class, args);
@@ -79,6 +83,26 @@ public class MyUniApplication implements CommandLineRunner {
         //System.out.println("Por Id : " + cdao.findById(1962779091));
         //System.out.println(cdao.findById(1962779091));
         
+        
+        List<Proceso> plistaM = new ArrayList<>();
+        plistaM.add(Proceso.Grupo_de_Whatsapp);
+        plistaM.add(Proceso.Convalidación_Titulo_Secundario);
+        plistaM.add(Proceso.Recepción_Aeropuerto);
+        
+       Cliente cm = new Cliente();
+        cm.setFoto("FOtoDaniel");
+        cm.setNombres("Daniel");
+        cm.setApellidos("armendi");
+        cm.setCiudad("Colombi");
+        cm.setFechaNacimiento("1990-10-29");
+        cm.setCelular(8978456);
+        cm.setEmail("andreagarcia.argentina@gmail.com");
+        cm.setPasaporte(9874561);
+        cm.setProcesos(plistaM);
     }
+    
+    ClienteController cr = new ClienteController();
+    cr.
+    
 
 }

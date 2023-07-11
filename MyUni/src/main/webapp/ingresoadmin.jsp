@@ -67,15 +67,16 @@
 
     <body>
         <%
-            //HttpSession session=request.getSession();
+            //HttpSession session = request.getSession();
 
-//                boolean xSession = false;
-//                try {
-//                xSession = (boolean) session.getAttribute("session");
-//             } catch (Exception e) {
-//             }
-//                if (!xSession)
-//                response.sendRedirect("sinsesion.html");
+            boolean xSession = false;
+            try {
+                xSession = (boolean) session.getAttribute("session");
+            } catch (Exception e) {
+            }
+            if (!xSession) {
+                response.sendRedirect("sinsesion.html");
+            }
 
         %>
         <link rel="stylesheet" href="assets/whatsappbotonflotante/whats.css">
@@ -107,7 +108,7 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="active"><a  target="_blank" href="index.html">HomeWebNormal</a></li>
+                                <li class="active"><a  target="_blank" href="https://unistudentasesoria.com/">HomeWebNormal</a></li>
                                 <li class="active"><a href="logout.jsp">Cerrar Sesión</a></li>
                             </ul><!-- / ul -->
                         </div><!-- /.navbar-collapse -->
@@ -282,56 +283,135 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="codigoClienteBuscar" placeholder="Ingrese el código del cliente">
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary" id="btnBuscarCliente">Buscar</button>
+                        </div>
                         <div class="modal-body">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="codigoCliente" placeholder="Ingrese el código del cliente">
+                            <form id="formularioModificar">
+                                <div class="form-group">
+                                    <label for="codigoCliente">ID:</label>
+                                    <input type="text" class="form-control" id="codigoClienteModificar" name="codigoCliente" readonly>
                                 </div>
-                            </div>
-                            <div class="col-auto">
-                                <button class="btn btn-primary" id="btnBuscarCliente">Buscar</button>
-                            </div>
+                                <div class="form-group">
+                                    <label for="foto">Foto:</label>
+                                    <input type="text" class="form-control" id="foto" name="foto" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombres">Nombres:</label>
+                                    <input type="text" class="form-control" id="nombres" name="nombres" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellidos">Apellidos:</label>
+                                    <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ciudad">Ciudad:</label>
+                                    <input type="text" class="form-control" id="ciudad" name="ciudad" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                                    <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="celular">Celular:</label>
+                                    <input type="text" class="form-control" id="celular" name="celular" required pattern="[0-9]+">
+                                    <small class="form-text text-muted">Ingrese solo números.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <small class="form-text text-muted">Ingrese un formato de correo válido.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pasaporte">Pasaporte:</label>
+                                    <input type="text" class="form-control" id="pasaporte" name="pasaporte" required pattern="[0-9]+">
+                                    <small class="form-text text-muted">Ingrese solo números.</small>
+                                </div>
 
-                            <div id="clienteInfo">
-                                <!-- Aquí se mostrarán los datos del cliente -->
-                            </div>
+                                <!-- Lista de procesos -->
+                                <div class="form-group">
+                                    <label for="procesos">Procesos:</label>
+                                    <!-- Agrega aquí el código para generar la lista de procesos -->
+                                </div>
+                                <!-- Fin Lista de procesos -->
+
+                                <button type="submit" class="btn btn-primary">Modificar</button>
+                            </form>
                         </div>
 
                         <script>
                             document.getElementById('btnBuscarCliente').addEventListener('click', function () {
-                                const clienteId = document.getElementById('codigoCliente').value;
-                                console.log(clienteId);
+                                const clienteId = document.getElementById('codigoClienteBuscar').value;
+                                console.log("Primer paso" + clienteId);
 
                                 fetch(`http://localhost:8084/myuni/clientes/buscar/` + clienteId)
                                         .then(response => response.json())
                                         .then(data => {
-                                            const clienteInfo = document.getElementById('clienteInfo');
+                                            const formularioModificar = document.getElementById('formularioModificar');
+                                            console.log("Data segundo paso : ");
                                             console.log(data);
 
                                             if (data) {
-                                                // Mostrar los datos del cliente en el elemento #clienteInfo
-                                                clienteInfo.innerHTML = `
-                                    <br>                
-                                    <h3>Datos del Cliente</h3>
-                                    <p>ID: ${data.id}</p>
-                                    <p>Nombre: ${data.nombres}</p>
-                                    <p>Apellido: ${data.apellidos}</p>
-                                    <!-- Agrega aquí más campos del cliente que deseas mostrar -->
-                                  `;
+                                                // Mostrar los datos del cliente en el formulario
+                                                document.getElementById('codigoClienteModificar').value = data.id;
+                                                document.getElementById('foto').value = data.foto;
+                                                document.getElementById('nombres').value = data.nombres;
+                                                document.getElementById('apellidos').value = data.apellidos;
+                                                document.getElementById('ciudad').value = data.ciudad;
+                                                document.getElementById('fechaNacimiento').value = data.fechaNacimiento;
+                                                document.getElementById('celular').value = data.celular;
+                                                document.getElementById('email').value = data.email;
+                                                document.getElementById('pasaporte').value = data.pasaporte;
                                             } else {
-                                                // No se encontró el cliente, mostrar un mensaje de error
-                                                clienteInfo.innerHTML = '<p>No se encontró el cliente.</p>';
+                                                console.error('No se encontró el cliente.');
                                             }
                                         })
                                         .catch(error => {
-                                            console.error('Error en la solicitud:', error);
+                                            console.error('Tocho Error en la solicitud:', error);
                                         });
                             });
-                        </script>
 
+                            document.getElementById('formularioModificar').addEventListener('submit', function (event) {
+                                event.preventDefault();
+
+                                // Obtener los valores del formulario
+                                const codigoCliente = document.getElementById('codigoClienteModificar').value.toString();
+                                const foto = document.getElementById('foto').value.toString();
+                                const nombres = document.getElementById('nombres').value.toString();
+                                const apellidos = document.getElementById('apellidos').value;
+                                const ciudad = document.getElementById('ciudad').value;
+                                const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+                                const celular = document.getElementById('celular').value;
+                                const email = document.getElementById('email').value;
+                                const pasaporte = document.getElementById('pasaporte').value;
+
+                                // Imprimir los datos en la consola
+                                console.log('Código Cliente:', codigoCliente);
+                                console.log('Foto:', foto);
+                                console.log('Nombres:', nombres);
+                                console.log('Apellidos:', apellidos);
+                                console.log('Ciudad:', ciudad);
+                                console.log('Fecha de Nacimiento:', fechaNacimiento);
+                                console.log('Celular:', celular);
+                                console.log('Email:', email);
+                                console.log('Pasaporte:', pasaporte);
+
+                                // Aquí puedes realizar acciones adicionales con los datos
+
+                                // Cerrar el modal
+                                $('#modal3').modal('hide');
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
+
+
 
 
 

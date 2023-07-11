@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -98,6 +100,43 @@ public class ClienteController {
             response.put("mensaje", "Error al agregar el cliente");
 
             return response;
+        }
+    }
+    
+    @PutMapping("modificar/{id}")
+    public ResponseEntity<?> modificarCliente(@PathVariable int id, @RequestParam("procesos") List<String> procesosTextos, @RequestBody Cliente clienteModificado) {
+        try {
+            Optional<Cliente> clienteOptional = cdao.findById(id);
+            if (clienteOptional.isPresent()) {
+                Cliente clienteExistente = clienteOptional.get();
+                
+                // Actualizar los campos del cliente existente con los datos del cliente modificado
+                clienteExistente.setFoto(clienteModificado.getFoto());
+                clienteExistente.setNombres(clienteModificado.getNombres());
+                clienteExistente.setApellidos(clienteModificado.getApellidos());
+                clienteExistente.setCiudad(clienteModificado.getCiudad());
+                clienteExistente.setFechaNacimiento(clienteModificado.getFechaNacimiento());
+                clienteExistente.setCelular(clienteModificado.getCelular());
+                clienteExistente.setEmail(clienteModificado.getEmail());
+                clienteExistente.setPasaporte(clienteModificado.getPasaporte());
+
+                // Actualizar la lista de procesos del cliente existente con los nuevos procesos
+                List<Proceso> listaProcesos = new ArrayList<>();
+                for (String procesoTexto : procesosTextos) {
+                    Proceso proceso = Proceso.valueOf(procesoTexto);
+                    listaProcesos.add(proceso);
+                }
+                clienteExistente.setProcesos(listaProcesos);
+                
+                // Guardar los cambios en la base de datos
+                cdao.save(clienteExistente);
+
+                return ResponseEntity.ok(clienteExistente);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al modificar el cliente");
         }
     }
 

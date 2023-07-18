@@ -84,25 +84,23 @@ public class MyUniApplication implements CommandLineRunner {
         //System.out.println(cdao.findById(1962779091));
         
         
-        List<Proceso> plistaM = new ArrayList<>();
-        plistaM.add(Proceso.Grupo_de_Whatsapp);
-        plistaM.add(Proceso.Convalidación_Titulo_Secundario);
-        plistaM.add(Proceso.Recepción_Aeropuerto);
-        
-       Cliente cm = new Cliente();
-        cm.setFoto("FOtoDaniel");
-        cm.setNombres("Daniel");
-        cm.setApellidos("armendi");
-        cm.setCiudad("Colombi");
-        cm.setFechaNacimiento("1990-10-29");
-        cm.setCelular(8978456);
-        cm.setEmail("andreagarcia.argentina@gmail.com");
-        cm.setPasaporte(9874561);
-        cm.setProcesos(plistaM);
+//        List<Proceso> plistaM = new ArrayList<>();
+//        plistaM.add(Proceso.Grupo_de_Whatsapp);
+//        plistaM.add(Proceso.Convalidación_Titulo_Secundario);
+//        plistaM.add(Proceso.Recepción_Aeropuerto);
+//        
+//       Cliente cm = new Cliente();
+//        cm.setFoto("FOtoDaniel");
+//        cm.setNombres("Daniel");
+//        cm.setApellidos("armendi");
+//        cm.setCiudad("Colombi");
+//        cm.setFechaNacimiento("1990-10-29");
+//        cm.setCelular(8978456);
+//        cm.setEmail("andreagarcia.argentina@gmail.com");
+//        cm.setPasaporte(9874561);
+//        cm.setProcesos(plistaM);
     }
     
-    ClienteController cr = new ClienteController();
-    cr.
-    
+   
 
 }

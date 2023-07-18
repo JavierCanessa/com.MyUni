@@ -1471,4 +1471,13 @@ body.on-side .wrap-sticky nav.navbar.bootsnav.sticked{
         padding-bottom: 30px;
     }
 }
+.form-check-input:disabled {
+  appearance: none;
+  background-color: #023047;
+  cursor: not-allowed;
+}
 
+.form-check-input:disabled + .form-check-label {
+  color: #023047;
+  cursor: not-allowed;
+}

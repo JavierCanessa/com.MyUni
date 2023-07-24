@@ -151,7 +151,7 @@
                         document.getElementById('btnBuscarCliente').addEventListener('click', function () {
                             const clienteId = document.getElementById('codigoClienteBuscar').value;
                             console.log("Primer paso" + clienteId);
-                            fetch(`http://localhost:8084/myuni/clientes/buscar/` + clienteId)
+                            fetch(`http://myuni.w1-us.cloudjiffy.net/clientes/buscar/` + clienteId)
                                     .then(response => response.json())
                                     .then(data => {
                                         const formularioModificar = document.getElementById('formularioModificar');

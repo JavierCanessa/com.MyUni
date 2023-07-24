@@ -121,17 +121,14 @@
                             <div class="form-group">
                                 <label for="celular">Celular:</label>
                                 <input type="text" class="form-control" style="font-size: 25px;" id="celular" name="celular" required pattern="[0-9]+" readonly>
-                                <small class="form-text text-muted">Ingrese solo números.</small>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
                                 <input type="email" class="form-control" style="font-size: 25px;" id="email" name="email" readonly>
-                                <small class="form-text text-muted">Ingrese un formato de correo válido.</small>
                             </div>
                             <div class="form-group">
                                 <label for="pasaporte">Pasaporte:</label>
                                 <input type="text" class="form-control" style="font-size: 25px;" id="pasaporte" name="pasaporte" required pattern="[0-9]+" readonly>
-                                <small class="form-text text-muted">Ingrese solo números.</small>
                             </div>
 
                             <!-- Lista de procesos -->

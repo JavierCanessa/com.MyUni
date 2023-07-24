@@ -108,7 +108,7 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="active"><a  target="_blank" href="https://unistudentasesoria.com/">HomeWebNormal</a></li>
+                                <li class="active"><a  target="_blank" href="https://www.unistudentasesoria.com/">HomeWebNormal</a></li>
                                 <li class="active"><a href="logout.jsp">Cerrar Sesión</a></li>
                             </ul><!-- / ul -->
                         </div><!-- /.navbar-collapse -->
@@ -237,7 +237,7 @@
                                     function handleFormSubmit(event) {
                                         event.preventDefault(); // Evitar la recarga de la página por defecto
 
-                                        fetch('http://localhost:8084/myuni/clientes/agregar', {
+                                        fetch('http://myuni.w1-us.cloudjiffy.net/clientes/agregar', {
                                             method: 'POST',
                                             body: new FormData(document.getElementById('formularioAgregar'))
                                         })
@@ -254,7 +254,7 @@
                                                         // Limpiar formulario y URL después de mostrar el mensaje
                                                         setTimeout(() => {
                                                             document.getElementById('formularioAgregar').reset();
-                                                            window.history.replaceState({}, document.title, 'http://localhost:8084/myuni/ingresoadmin.jsp');
+                                                            window.history.replaceState({}, document.title, 'http://myuni.w1-us.cloudjiffy.net/ingresoadmin.jsp');
                                                         }, 100);
                                                     } else {
                                                         console.error('Error al agregar el cliente:', data.mensaje);
@@ -349,7 +349,7 @@
                                 const clienteId = document.getElementById('codigoClienteBuscar').value;
                                 console.log("Primer paso" + clienteId);
 
-                                fetch(`http://localhost:8084/myuni/clientes/buscar/` + clienteId)
+                                fetch(`http://myuni.w1-us.cloudjiffy.net/clientes/buscar/` + clienteId)
                                         .then(response => response.json())
                                         .then(data => {
                                             const formularioModificar = document.getElementById('formularioModificar');

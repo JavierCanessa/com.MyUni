@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -93,6 +94,7 @@ public class ClienteController {
 
             response.put("agregado", true);
             response.put("mensaje", "Cliente agregado: " + cliente.getId() + " " + nombres + " " + apellidos);
+            response.put("mensaje1", "Cliente modificado: " + cliente.getId() + " " + nombres + " " + apellidos);
 
             return response;
         } catch (Exception e) {
@@ -102,23 +104,17 @@ public class ClienteController {
             return response;
         }
     }
-    
+
     @PutMapping("modificar/{id}")
-    public ResponseEntity<?> modificarCliente(@PathVariable int id, @RequestParam("procesos") List<String> procesosTextos, @RequestBody Cliente clienteModificado) {
+    public ResponseEntity<?> modificarCliente(
+            @PathVariable int id,
+            @RequestParam("procesos") List<String> procesosTextos,
+            @ModelAttribute Cliente clienteModificado
+    ) {
         try {
             Optional<Cliente> clienteOptional = cdao.findById(id);
             if (clienteOptional.isPresent()) {
                 Cliente clienteExistente = clienteOptional.get();
-                
-                // Actualizar los campos del cliente existente con los datos del cliente modificado
-                clienteExistente.setFoto(clienteModificado.getFoto());
-                clienteExistente.setNombres(clienteModificado.getNombres());
-                clienteExistente.setApellidos(clienteModificado.getApellidos());
-                clienteExistente.setCiudad(clienteModificado.getCiudad());
-                clienteExistente.setFechaNacimiento(clienteModificado.getFechaNacimiento());
-                clienteExistente.setCelular(clienteModificado.getCelular());
-                clienteExistente.setEmail(clienteModificado.getEmail());
-                clienteExistente.setPasaporte(clienteModificado.getPasaporte());
 
                 // Actualizar la lista de procesos del cliente existente con los nuevos procesos
                 List<Proceso> listaProcesos = new ArrayList<>();
@@ -127,11 +123,14 @@ public class ClienteController {
                     listaProcesos.add(proceso);
                 }
                 clienteExistente.setProcesos(listaProcesos);
-                
+
+                // Actualizar el cliente existente con los datos del cliente modificado
+                BeanUtils.copyProperties(clienteModificado, clienteExistente, "id");
+
                 // Guardar los cambios en la base de datos
                 cdao.save(clienteExistente);
 
-                return ResponseEntity.ok(clienteExistente);
+                return ResponseEntity.ok("true");
             } else {
                 return ResponseEntity.notFound().build();
             }

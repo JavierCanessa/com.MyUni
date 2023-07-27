@@ -54,6 +54,19 @@
 
     </head>
     <body>
+        <%
+            //HttpSession session = request.getSession();
+
+            boolean xSession = false;
+            try {
+                xSession = (boolean) session.getAttribute("session");
+            } catch (Exception e) {
+            }
+            if (!xSession) {
+                response.sendRedirect("sinsesion.html");
+            }
+
+        %>
 
         <!--menu start-->
         <section id="menu">
@@ -145,6 +158,7 @@
                                 <% }%>
                             </div>
                             <button type="submit" class="btn btn-primary">Modificar</button>
+                            <a  id="btnEliminar" class="btn btn-primary">Eliminar</a>
                             <div id="popup" style="display: none;">
                                 <p id="mensajeM"></p>
                                 <button id="okButton">OK</button>
@@ -152,6 +166,7 @@
 
 
                             <script>
+                                //Boton Buscar
                                 document.getElementById('btnBuscarCliente').addEventListener('click', function () {
                                     const clienteId = document.getElementById('codigoClienteBuscar').value;
                                     console.log("Primer paso" + clienteId);
@@ -189,12 +204,11 @@
                                                 console.error('Tocho Error en la solicitud:', error);
                                             });
                                 });
-                            </script>
-
-                            <script>
+                                
+                                
+                                
                                 // Agregar controlador de eventos para el evento "submit" del formulario
                                 document.getElementById('formularioModificar').addEventListener('submit', handleFormSubmit);
-
 
                                 function handleFormSubmit(event) {
                                     event.preventDefault(); // Evitar la recarga de la página por defecto
@@ -227,6 +241,13 @@
                                                 console.error('Error en la solicitud:', error);
                                             });
                                 }
+                                
+                                
+                                //Boton Eliminar
+                                document.getElementById("btnEliminar").addEventListener('click', function (){
+                                    const clienteId = document.getElementById('codigoClienteBuscar').value;
+                                    alert("Quieres eliminar este cliente : " + clienteId);
+                                });
                             </script>
 
 

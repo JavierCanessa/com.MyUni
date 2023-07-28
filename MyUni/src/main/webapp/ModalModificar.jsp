@@ -158,7 +158,7 @@
                                 <% }%>
                             </div>
                             <button type="submit" class="btn btn-primary">Modificar</button>
-                            <a  id="btnEliminar" class="btn btn-primary">Eliminar</a>
+                            <button  id="btnEliminar" class="btn btn-primary">Eliminar</button>
                             <div id="popup" style="display: none;">
                                 <p id="mensajeM"></p>
                                 <button id="okButton">OK</button>
@@ -197,16 +197,16 @@
                                                         }
                                                     });
                                                 } else {
-                                                    console.error('No se encontró el cliente.');
+                                                    alert("Cliente no se encuentra.");
                                                 }
                                             })
                                             .catch(error => {
                                                 console.error('Tocho Error en la solicitud:', error);
                                             });
                                 });
-                                
-                                
-                                
+
+
+
                                 // Agregar controlador de eventos para el evento "submit" del formulario
                                 document.getElementById('formularioModificar').addEventListener('submit', handleFormSubmit);
 
@@ -228,9 +228,9 @@
                                                     //const mensajeAlert = `Cliente agregado` + data.mensaje;
                                                     alert(mensaje);
 
-                                                    // Limpiar formulario y URL después de mostrar el mensaje
                                                     setTimeout(() => {
-                                                        window.location.href = 'http://localhost:8084/myuni/ingresoadmin.jsp';
+                                                        //window.location.href = 'http://localhost:8084/myuni/ingresoadmin.jsp';
+                                                        document.getElementById('formularioModificar').reset();
                                                     }, 10);
 
                                                 } else {
@@ -241,12 +241,35 @@
                                                 console.error('Error en la solicitud:', error);
                                             });
                                 }
-                                
-                                
+
+
                                 //Boton Eliminar
-                                document.getElementById("btnEliminar").addEventListener('click', function (){
+                                document.getElementById("btnEliminar").addEventListener('click', function () {
                                     const clienteId = document.getElementById('codigoClienteBuscar').value;
-                                    alert("Quieres eliminar este cliente : " + clienteId);
+                                    const nombreCliente = document.getElementById("nombres").value;
+                                    const apellidoCliente = document.getElementById("apellidos").value;
+                                    let respuesta = confirm("Quieres eliminar este cliente : " + clienteId + " " + nombreCliente + " " + apellidoCliente + ".");
+
+                                    if (respuesta === true) {
+                                        fetch('http://localhost:8084/myuni/clientes/eliminar/' + clienteId, {
+                                            method: 'GET',
+                                        })
+                                                .then(response => response.text())
+                                                .then(data => {
+                                                    alert(data); // Mostrar la respuesta del servidor (por ejemplo, "id : 123 eliminado")
+                                                    // Aquí podrías realizar cualquier otra acción necesaria después de eliminar el cliente.
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error al eliminar el cliente:', error);
+                                                });
+                                        // Limpiar formulario y URL después de mostrar el mensaje
+                                        setTimeout(() => {
+                                            document.getElementById('formularioModificar').reset();
+                                            //window.history.replaceState({}, document.title, 'http://localhost:8084/myuni/ingresoadmin.jsp');
+                                        }, 10);
+                                    } else {
+
+                                    }
                                 });
                             </script>
 

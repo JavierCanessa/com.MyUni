@@ -197,7 +197,7 @@
                                                         }
                                                     });
                                                 } else {
-                                                    alert("Cliente no se encuentra.");
+                                                    console.error('No se encontró el cliente.');
                                                 }
                                             })
                                             .catch(error => {

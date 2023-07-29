@@ -158,7 +158,7 @@
                                 <% }%>
                             </div>
                             <button type="submit" class="btn btn-primary">Modificar</button>
-                            <button  id="btnEliminar" class="btn btn-primary">Eliminar</button>
+                            <p  id="btnEliminar" class="btn btn-primary">Eliminar</p>
                             <div id="popup" style="display: none;">
                                 <p id="mensajeM"></p>
                                 <button id="okButton">OK</button>
@@ -214,32 +214,34 @@
                                     event.preventDefault(); // Evitar la recarga de la página por defecto
                                     const idCliente = document.getElementById('codigoClienteModificar').value;
 
-                                    fetch('http://localhost:8084/myuni/clientes/modificar/' + idCliente, {
-                                        method: 'PUT',
-                                        body: new FormData(document.getElementById('formularioModificar'))
-                                    })
-                                            .then(response => response.text())
-                                            .then(data => {
-                                                console.log(data);
-                                                if (data == "true") {
-                                                    const mensaje = "Cliente Modificado con exito";
+                                    const confirmacion = confirm("¿Deseas modificar este cliente?");
+                                    if (confirmacion) {
+                                        fetch('http://localhost:8084/myuni/clientes/modificar/' + idCliente, {
+                                            method: 'PUT',
+                                            body: new FormData(document.getElementById('formularioModificar'))
+                                        })
+                                                .then(response => response.text())
+                                                .then(data => {
+                                                    console.log(data);
+                                                    if (data === "true") {
+                                                        const mensaje = "Cliente Modificado con exito";
+                                                        alert(mensaje);
 
-                                                    // Mostrar mensaje emergente de cliente agregado utilizando alert
-                                                    //const mensajeAlert = `Cliente agregado` + data.mensaje;
-                                                    alert(mensaje);
+                                                        setTimeout(() => {
+                                                            //window.location.href = 'http://localhost:8084/myuni/ingresoadmin.jsp';
+                                                            document.getElementById('formularioModificar').reset();
+                                                        }, 10);
 
-                                                    setTimeout(() => {
-                                                        //window.location.href = 'http://localhost:8084/myuni/ingresoadmin.jsp';
-                                                        document.getElementById('formularioModificar').reset();
-                                                    }, 10);
-
-                                                } else {
-                                                    console.error('Error al agregar el cliente:', data.mensaje);
-                                                }
-                                            })
-                                            .catch(error => {
-                                                console.error('Error en la solicitud:', error);
-                                            });
+                                                    } else {
+                                                        console.error('Error al modificar el cliente:', data.mensaje);
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error en la solicitud:', error);
+                                                });
+                                    } else {
+                                        alert("Operación de modificación cancelada");
+                                    }
                                 }
 
 
@@ -268,7 +270,7 @@
                                             //window.history.replaceState({}, document.title, 'http://localhost:8084/myuni/ingresoadmin.jsp');
                                         }, 10);
                                     } else {
-
+                                        alert("Operación cancelada");
                                     }
                                 });
                             </script>

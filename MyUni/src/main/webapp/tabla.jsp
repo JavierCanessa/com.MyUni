@@ -9,7 +9,6 @@
 <%@page import="com.MyUni.MyUni.Dao.ClienteDAO"%>
 <%@page import="com.MyUni.MyUni.Entidades.Cliente" %>
 <%@page import="com.MyUni.MyUni.Entidades.Proceso" %>
-<%@ page import="java.net.HttpURLConnection, java.net.URL, java.io.BufferedReader, java.io.InputStreamReader" %>
 <!DOCTYPE html>
 
 <html>
@@ -18,6 +17,26 @@
         <title>My Uni</title>
         <!-- for title img -->
         <link rel="shortcut icon" type="image/icon" href="assets/images/logo/unistudent_logo.svg" />
+
+        <!--font-awesome.min.css-->
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+        <!--linear icon css-->
+        <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+        <!--animate.css-->
+        <link rel="stylesheet" href="assets/css/animate.css">
+
+        <!--hover.css-->
+        <link rel="stylesheet" href="assets/css/hover-min.css">
+
+        <!--vedio player css-->
+        <link rel="stylesheet" href="assets/css/magnific-popup.css">
+
+        <!--owl.carousel.css-->
+        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+        <link href="assets/css/owl.theme.default.min.css" rel="stylesheet" />
+
 
         <!--bootstrap.min.css-->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -30,8 +49,10 @@
 
         <!--responsive.css-->
         <link rel="stylesheet" href="assets/css/responsive.css">
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     </head>
     <body>
@@ -72,121 +93,68 @@
         <!--/#menu-->
         <!--menu end-->
 
-        <style>
-            /* Agregar estilos para la lista desplegable */
-            .dropdown-content {
-                display: none;
-                position: absolute;
-                background-color: #f9f9f9;
-                min-width: 160px;
-                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                padding: 12px 16px;
-                z-index: 1;
-            }
 
-            /* Estilos para la opción seleccionada */
-            .selected-option {
-                color: #ffffff;
-                background-color: #007bff;
-            }
-        </style>
-
-        <div style="font-size: 22px; margin-bottom: 100px; margin-top: 50px" >
-            <table id="tablaAdmin" class="table table-hover table-dark">
+        <div id="divTabla" style="font-size: 22px; margin-bottom: 100px; margin-top: 50px" >
+            <table id="json-table" class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Foto</th>
-                        <th scope="col">Nombres</th>
-                        <th scope="col">Apellidos</th>
-                        <th scope="col">Ciudad</th>
-                        <th scope="col">Fecha Nacimiento</th>
-                        <th scope="col">Celular</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Pasaporte</th>
-                        <th scope="col">Procesos</th>
+                        <th>ID</th>
+                        <th>Foto</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Ciudad</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Celular</th>
+                        <th>Email</th>
+                        <th>Pasaporte</th>
+                        <th>Procesos</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td id="foto"></td>
-                        <td id="nombres"></td>
-                        <td id="apellidos"></td>
-                        <td id="ciudad"></td>
-                        <td id="fechaNacimiento"></td>
-                        <td id="celular"></td>
-                        <td id="email"></td>
-                        <td id="pasaporte"></td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="selected-option" onclick="toggleDropdown()">Procesos</button>
-                                <div id="procesosDropdown" class="dropdown-content">
-                                    <!-- Aquí puedes agregar los distintos items del desplegable -->
-                                    <!-- Por ejemplo, los valores pueden ser "proceso1", "proceso2", etc. -->
-                                    <p><input type="checkbox" name="procesos" value="proceso1"> Proceso 1</p>
-                                    <p><input type="checkbox" name="procesos" value="proceso2"> Proceso 2</p>
-                                    <p><input type="checkbox" name="procesos" value="proceso3"> Proceso 3</p>
-                                    <!-- ... -->
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
+
         </div>
 
+
         <script>
-            // Función para mostrar/ocultar la lista desplegable de procesos
-            function toggleDropdown() {
-                const dropdown = document.getElementById("procesosDropdown");
-                dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-            }
+            $(document).ready(function () {
+                // Realizar una solicitud AJAX para obtener el JSON
+                $.getJSON("http://localhost:8084/myuni/clientes/all", function (data) {
+                    var tableBody = $("#divTabla tbody");
 
+                    // Iterar sobre los objetos JSON y crear filas de tabla
+                    data.forEach(function (item) {
+                        var row = $("<tr>");
+                        var idLink = $("<a>").attr("href", "http://localhost:8084/myuni/ModalModificar.jsp") // Agrega la URL adecuada
+                                .text(item.id);
 
-            // Función para obtener los datos de todos los clientes desde el API
-            function obtenerClientes() {
-                fetch('http://localhost:8084/myuni/clientes/all')
-                        .then(response => response.json())
-                        .then(data => {
-                            // Llenar la tabla con los datos de los clientes
-                            const tablaBody = document.getElementById("tablaClientesBody");
-                            tablaBody.innerHTML = ""; // Limpiar contenido actual de la tabla
+                        row.append($("<td>").append(idLink)); // Envuelve el "id" en un elemento <a>
+                        row.append($("<td>").text(item.foto));
+                        row.append($("<td>").text(item.nombres));
+                        row.append($("<td>").text(item.apellidos));
+                        row.append($("<td>").text(item.ciudad));
+                        row.append($("<td>").text(item.fechaNacimiento));
+                        row.append($("<td>").text(item.celular));
+                        row.append($("<td>").text(item.email));
+                        row.append($("<td>").text(item.pasaporte));
 
-                            data.forEach(cliente => {
-                                const fila = document.createElement("tr");
-                                fila.innerHTML = `
-                        <th scope="row">${cliente.id}</th>
-                        <td>${cliente.foto}</td>
-                        <td>${cliente.nombres}</td>
-                        <td>${cliente.apellidos}</td>
-                        <td>${cliente.ciudad}</td>
-                        <td>${cliente.fechaNacimiento}</td>
-                        <td>${cliente.celular}</td>
-                        <td>${cliente.email}</td>
-                        <td>${cliente.pasaporte}</td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="selected-option" onclick="toggleDropdown(event)">Procesos</button>
-                                <div class="dropdown-content">
-            
-                                </div>
-                            </div>
-                        </td>
-                    `;
-                                tablaBody.appendChild(fila);
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Error al obtener los clientes:', error);
-                        });
-            }
+                        // Crear una lista desplegable para procesos
+                        var processesSelect = $("<select>");
+                        var processes = item.procesos;
+                        for (var i = 0; i < processes.length; i++) {
+                            processesSelect.append($("<option>").text(processes[i]));
+                        }
+                        row.append($("<td>").append(processesSelect));
 
-            // Llamar a la función para obtener los clientes al cargar la página
-            obtenerClientes();
-
-
+                        tableBody.append(row);
+                    });
+                });
+            });
         </script>
+
+
+
 
 
 
@@ -234,11 +202,31 @@
     <script src="assets/js/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 
+
+    <!--bootstrap.min.js-->
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+
+    <!--1111 bootsnav js -->
+    <script src="assets/js/bootsnav.js"></script>
+
     <!-- for manu -->
     <script src="assets/js/jquery.hc-sticky.min.js" type="text/javascript"></script>
+
+
+    <!-- vedio player js -->
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+
+
+    <!--owl.carousel.js-->
+    <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+
+    <!-- counter js -->
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
 
     <!--Custom JS-->
     <script type="text/javascript" src="assets/js/jak-menusearch.js"></script>
     <script type="text/javascript" src="assets/js/custom.js"></script>
+
 
 </html>

@@ -45,6 +45,7 @@ public class Cliente {
     private long celular;
     private String email;
     private long pasaporte;
+    private String portafolio;
 
     @ElementCollection(targetClass = Proceso.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
@@ -73,6 +74,21 @@ public class Cliente {
         this.pasaporte = pasaporte;
         this.procesos = procesos;
     }
+
+    public Cliente(String foto, String nombres, String apellidos, String ciudad, String fechaNacimiento, long celular, String email, long pasaporte, String portafolio, List<Proceso> procesos) {
+        this.foto = foto;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.ciudad = ciudad;
+        this.fechaNacimiento = fechaNacimiento;
+        this.celular = celular;
+        this.email = email;
+        this.pasaporte = pasaporte;
+        this.portafolio = portafolio;
+        this.procesos = procesos;
+    }
+    
+    
 
     public String getFoto() {
         return foto;
@@ -146,13 +162,23 @@ public class Cliente {
         this.procesos = procesos;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" + "id=" + id + ", foto=" + foto + ", nombres=" + nombres + ", apellidos=" + apellidos + ", ciudad=" + ciudad + ", fechaNacimiento=" + fechaNacimiento + ", celular=" + celular + ", email=" + email + ", pasaporte=" + pasaporte + ", procesos=" + procesos + '}';
-    }
-
     public int getId() {
         return id;
     }
+
+    public String getPortafolio() {
+        return portafolio;
+    }
+
+    public void setPortafolio(String portafolio) {
+        this.portafolio = portafolio;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "id=" + id + ", foto=" + foto + ", nombres=" + nombres + ", apellidos=" + apellidos + ", ciudad=" + ciudad + ", fechaNacimiento=" + fechaNacimiento + ", celular=" + celular + ", email=" + email + ", pasaporte=" + pasaporte + ", portafolio=" + portafolio + ", procesos=" + procesos + '}';
+    }
+    
+    
 
 }

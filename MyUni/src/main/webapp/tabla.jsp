@@ -107,6 +107,7 @@
                         <th>Celular</th>
                         <th>Email</th>
                         <th>Pasaporte</th>
+                        <th>Portafolio</th>
                         <th>Procesos</th>
                     </tr>
                 </thead>
@@ -139,6 +140,12 @@
                         row.append($("<td>").text(item.celular));
                         row.append($("<td>").text(item.email));
                         row.append($("<td>").text(item.pasaporte));
+
+                        // Crear un enlace <a> para el campo "portafolio"
+                        var portafolioLink = $("<a>")
+                                .attr("href", item.portafolio) // Configura la URL del portafolio
+                                .text("Ver Portafolio"); // Texto del enlace
+                        row.append($("<td>").append(portafolioLink)); // Agrega el enlace <a> al campo "portafolio"
 
                         // Crear una lista desplegable para procesos
                         var processesSelect = $("<select>");

@@ -94,6 +94,11 @@
 
         <div class="container" style="font-size: 25px;margin-top: 50px">
             <div class="row">
+                <div class="col-auto">
+                    <button class="btn btn-secondary">
+                        <a href="tabla.jsp" >Tabla Completa</a>
+                    </button>
+                </div> <br>
                 <div class="col-4">
                 </div>
                 <div class="col-4">
@@ -166,6 +171,14 @@
 
 
                             <script>
+
+                                // Obtener el valor del ID de la URL
+                                const urlParams = new URLSearchParams(window.location.search);
+                                const codigoCliente = urlParams.get("codigoClienteBuscar");
+                                if (codigoCliente) {
+                                    document.getElementById('codigoClienteBuscar').value = codigoCliente;
+                                }
+
                                 //Boton Buscar
                                 document.getElementById('btnBuscarCliente').addEventListener('click', function () {
                                     const clienteId = document.getElementById('codigoClienteBuscar').value;

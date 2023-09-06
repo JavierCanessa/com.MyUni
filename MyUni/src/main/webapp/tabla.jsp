@@ -126,7 +126,8 @@
                     // Iterar sobre los objetos JSON y crear filas de tabla
                     data.forEach(function (item) {
                         var row = $("<tr>");
-                        var idLink = $("<a>").attr("href", "http://localhost:8084/myuni/ModalModificar.jsp") // Agrega la URL adecuada
+                        var idLink = $("<a>")
+                                .attr("href", "ModalModificar.jsp?codigoClienteBuscar=" + item.id) // Configura la URL adecuada con el ID como parámetro
                                 .text(item.id);
 
                         row.append($("<td>").append(idLink)); // Envuelve el "id" en un elemento <a>

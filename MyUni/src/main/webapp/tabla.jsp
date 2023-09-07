@@ -99,7 +99,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Foto</th>
+                        <!--<th>Foto</th>-->
                         <th>Nombres</th>
                         <th>Apellidos</th>
                         <th>Ciudad</th>
@@ -132,7 +132,7 @@
                                 .text(item.id);
 
                         row.append($("<td>").append(idLink)); // Envuelve el "id" en un elemento <a>
-                        row.append($("<td>").text(item.foto));
+                        //row.append($("<td>").text(item.foto));
                         row.append($("<td>").text(item.nombres));
                         row.append($("<td>").text(item.apellidos));
                         row.append($("<td>").text(item.ciudad));

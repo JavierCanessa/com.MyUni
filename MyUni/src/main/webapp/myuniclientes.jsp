@@ -133,6 +133,11 @@
                                 <input type="text" class="form-control" style="font-size: 25px;" id="pasaporte" name="pasaporte" required pattern="[0-9]+" readonly>
                                 <small class="form-text text-muted">Ingrese solo números.</small>
                             </div>
+                            <div class="form-group">
+                                <label for="portafolio">Portafolio:</label><br>
+                                <a id="portafolioLink"  style="font-size: 25px;" href="#" target="_blank"></a>
+                            </div>
+
 
                             <!-- Lista de procesos -->
                             <div class="form-group">
@@ -168,6 +173,10 @@
                                             document.getElementById('celular').value = data.celular;
                                             document.getElementById('email').value = data.email;
                                             document.getElementById('pasaporte').value = data.pasaporte;
+                                            // Dentro de tu función de manejo de datos (donde llenas el formulario)
+                                            document.getElementById('portafolioLink').href = data.portafolio;
+                                            document.getElementById('portafolioLink').textContent = 'Ir a mi portafolio'; // Texto del enlace
+
                                             // Marcar los checkboxes de los procesos del cliente
                                             const procesosCliente = data.procesos;
                                             const checkboxes = document.querySelectorAll('input[name="procesos"]');

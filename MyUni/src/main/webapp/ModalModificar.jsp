@@ -116,10 +116,10 @@
                                 <label for="codigoCliente">ID:</label>
                                 <input type="text" class="form-control" style="font-size: 25px;" id="codigoClienteModificar" name="codigoCliente" readonly>
                             </div>
-                            <div class="form-group">
+<!--                            <div class="form-group">
                                 <label for="foto">Foto:</label>
                                 <input type="text" class="form-control" style="font-size: 25px;" id="foto" name="foto" >
-                            </div>
+                            </div>-->
                             <div class="form-group">
                                 <label for="nombres">Nombres:</label>
                                 <input type="text" class="form-control" style="font-size: 25px;" id="nombres" name="nombres" >
@@ -196,7 +196,7 @@
                                                 if (data) {
                                                     // Mostrar los datos del cliente en el formulario
                                                     document.getElementById('codigoClienteModificar').value = data.id;
-                                                    document.getElementById('foto').value = data.foto;
+                                                    //document.getElementById('foto').value = data.foto;
                                                     document.getElementById('nombres').value = data.nombres;
                                                     document.getElementById('apellidos').value = data.apellidos;
                                                     document.getElementById('ciudad').value = data.ciudad;

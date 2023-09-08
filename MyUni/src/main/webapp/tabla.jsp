@@ -59,14 +59,14 @@
         <%
             //HttpSession session = request.getSession();
 
-//            boolean xSession = false;
-//            try {
-//                xSession = (boolean) session.getAttribute("session");
-//            } catch (Exception e) {
-//            }
-//            if (!xSession) {
-//                response.sendRedirect("sinsesion.html");
-//            }
+            boolean xSession = false;
+            try {
+                xSession = (boolean) session.getAttribute("session");
+            } catch (Exception e) {
+            }
+            if (!xSession) {
+                response.sendRedirect("sinsesion.html");
+            }
 
         %>
 

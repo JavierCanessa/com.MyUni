@@ -177,10 +177,10 @@
                         </div>
                         <div class="modal-body">
                             <form id="formularioAgregar" >
-                                <div class="form-group">
-                                    <label for="foto">Foto:</label>
-                                    <input type="text" class="form-control" id="foto" name="foto" required>
-                                </div>
+                                <!--                                <div class="form-group">
+                                                                    <label for="foto">Foto:</label>
+                                                                    <input type="text" class="form-control" id="foto" name="foto" required>
+                                                                </div>-->
                                 <div class="form-group">
                                     <label for="nombres">Nombres:</label>
                                     <input type="text" class="form-control" id="nombres" name="nombres" required>
@@ -211,6 +211,10 @@
                                     <label for="pasaporte">Pasaporte:</label>
                                     <input type="text" class="form-control" id="pasaporte" name="pasaporte" required pattern="[0-9]+">
                                     <small class="form-text text-muted">Ingrese solo números.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="portafolio">Portafolio:</label>
+                                    <input type="text" class="form-control" style="font-size: 25px;" id="portafolio" name="portafolio" >
                                 </div>
 
                                 <!-- Lista de procesos -->

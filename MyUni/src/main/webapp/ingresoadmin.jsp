@@ -124,7 +124,7 @@
 
 
         <!--Tabla-->
-        <section  style="padding: 40px 20px 100px 20px ;margin-bottom: 200px" id="Nosotros" class="about-us">
+        <section  style="padding: 40px 20px 100px 20px ;margin-bottom: 400px" id="Nosotros" class="about-us">
 
             <h1  style="margin-bottom:100px" id="topPagina" >Administrador MyUni</h1>
 
@@ -132,14 +132,19 @@
             <div class="container mt-5">
                 <div class="row">
                     <div class="col-md-4">
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal1">Tabla Completa</button>
+                        <a href="tabla.jsp" >
+                            <button type="button" class="btn btn-primary btn-lg" >Tabla Completa</button>
+                        </a>
                     </div>
                     <div class="col-md-4">
                         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal2">Agregar</button>
                     </div>
                     <div class="col-md-4">
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal3">Modificar/Eliminar</button>
+                        <a href="ModalModificar.jsp" >
+                            <button type="button" class="btn btn-primary btn-lg">Modificar/Eliminar</button>
+                        </a>
                     </div>
+
                 </div>
             </div>
 
@@ -172,10 +177,10 @@
                         </div>
                         <div class="modal-body">
                             <form id="formularioAgregar" >
-                                <div class="form-group">
-                                    <label for="foto">Foto:</label>
-                                    <input type="text" class="form-control" id="foto" name="foto" required>
-                                </div>
+                                <!--                                <div class="form-group">
+                                                                    <label for="foto">Foto:</label>
+                                                                    <input type="text" class="form-control" id="foto" name="foto" required>
+                                                                </div>-->
                                 <div class="form-group">
                                     <label for="nombres">Nombres:</label>
                                     <input type="text" class="form-control" id="nombres" name="nombres" required>
@@ -206,6 +211,10 @@
                                     <label for="pasaporte">Pasaporte:</label>
                                     <input type="text" class="form-control" id="pasaporte" name="pasaporte" required pattern="[0-9]+">
                                     <small class="form-text text-muted">Ingrese solo números.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="portafolio">Portafolio:</label>
+                                    <input type="text" class="form-control" style="font-size: 25px;" id="portafolio" name="portafolio" >
                                 </div>
 
                                 <!-- Lista de procesos -->
@@ -272,6 +281,7 @@
                 </div>
             </div>
 
+<<<<<<< HEAD
 
             <!-- Modal 3 -->
             <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="modal2Label" aria-hidden="true">
@@ -416,6 +426,8 @@
 
 
 
+=======
+>>>>>>> desarrollo1
         </section>
 
         <!-- footer-copyright start -->

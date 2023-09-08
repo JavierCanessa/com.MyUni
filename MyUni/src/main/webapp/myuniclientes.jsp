@@ -130,6 +130,11 @@
                                 <label for="pasaporte">Pasaporte:</label>
                                 <input type="text" class="form-control" style="font-size: 25px;" id="pasaporte" name="pasaporte" required pattern="[0-9]+" readonly>
                             </div>
+                            <div class="form-group">
+                                <label for="portafolio">Portafolio:</label><br>
+                                <a id="portafolioLink"  style="font-size: 25px;" href="#" target="_blank"></a>
+                            </div>
+
 
                             <!-- Lista de procesos -->
                             <div class="form-group">
@@ -148,7 +153,7 @@
                         document.getElementById('btnBuscarCliente').addEventListener('click', function () {
                             const clienteId = document.getElementById('codigoClienteBuscar').value;
                             console.log("Primer paso" + clienteId);
-                            fetch(`http://myuni.w1-us.cloudjiffy.net/clientes/buscar/` + clienteId)
+                            fetch(`http://localhost:8084/myuni/clientes/buscar/` + clienteId)
                                     .then(response => response.json())
                                     .then(data => {
                                         const formularioModificar = document.getElementById('formularioModificar');
@@ -165,6 +170,10 @@
                                             document.getElementById('celular').value = data.celular;
                                             document.getElementById('email').value = data.email;
                                             document.getElementById('pasaporte').value = data.pasaporte;
+                                            // Dentro de tu función de manejo de datos (donde llenas el formulario)
+                                            document.getElementById('portafolioLink').href = data.portafolio;
+                                            document.getElementById('portafolioLink').textContent = 'Ir a mi portafolio'; // Texto del enlace
+
                                             // Marcar los checkboxes de los procesos del cliente
                                             const procesosCliente = data.procesos;
                                             const checkboxes = document.querySelectorAll('input[name="procesos"]');

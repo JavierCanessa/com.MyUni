@@ -187,7 +187,7 @@
                                 document.getElementById('btnBuscarCliente').addEventListener('click', function () {
                                     const clienteId = document.getElementById('codigoClienteBuscar').value;
                                     console.log("Primer paso" + clienteId);
-                                    fetch(`http://localhost:8084/myuni/clientes/buscar/` + clienteId)
+                                    fetch(`http://myuni.w1-us.cloudjiffy.net/clientes/buscar/` + clienteId)
                                             .then(response => response.json())
                                             .then(data => {
                                                 const formularioModificar = document.getElementById('formularioModificar');
@@ -234,7 +234,7 @@
 
                                     const confirmacion = confirm("¿Deseas modificar este cliente?");
                                     if (confirmacion) {
-                                        fetch('http://localhost:8084/myuni/clientes/modificar/' + idCliente, {
+                                        fetch('http://myuni.w1-us.cloudjiffy.net/clientes/modificar/' + idCliente, {
                                             method: 'PUT',
                                             body: new FormData(document.getElementById('formularioModificar'))
                                         })
@@ -246,7 +246,7 @@
                                                         alert(mensaje);
 
                                                         setTimeout(() => {
-                                                            //window.location.href = 'http://localhost:8084/myuni/ingresoadmin.jsp';
+                                                            //window.location.href = 'http://myuni.w1-us.cloudjiffy.net/ingresoadmin.jsp';
                                                             document.getElementById('formularioModificar').reset();
                                                         }, 10);
 
@@ -271,7 +271,7 @@
                                     let respuesta = confirm("Quieres eliminar este cliente : " + clienteId + " " + nombreCliente + " " + apellidoCliente + ".");
 
                                     if (respuesta === true) {
-                                        fetch('http://localhost:8084/myuni/clientes/eliminar/' + clienteId, {
+                                        fetch('http://myuni.w1-us.cloudjiffy.net/clientes/eliminar/' + clienteId, {
                                             method: 'GET',
                                         })
                                                 .then(response => response.text())
@@ -285,7 +285,7 @@
                                         // Limpiar formulario y URL después de mostrar el mensaje
                                         setTimeout(() => {
                                             document.getElementById('formularioModificar').reset();
-                                            //window.history.replaceState({}, document.title, 'http://localhost:8084/myuni/ingresoadmin.jsp');
+                                            //window.history.replaceState({}, document.title, 'http://myuni.w1-us.cloudjiffy.net/ingresoadmin.jsp');
                                         }, 10);
                                     } else {
                                         alert("Operación cancelada");

@@ -121,7 +121,7 @@
         <script>
             $(document).ready(function () {
                 // Realizar una solicitud AJAX para obtener el JSON
-                $.getJSON("http://localhost:8084/myuni/clientes/all", function (data) {
+                $.getJSON("http://myuni.w1-us.cloudjiffy.net/clientes/all", function (data) {
                     var tableBody = $("#divTabla tbody");
 
                     // Iterar sobre los objetos JSON y crear filas de tabla

@@ -131,15 +131,15 @@
 
             <div class="container mt-5">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div style="margin-bottom: 20px" class="col-md-4">
                         <a href="tabla.jsp" >
                             <button type="button" class="btn btn-primary btn-lg" >Tabla Completa</button>
                         </a>
                     </div>
-                    <div class="col-md-4">
+                    <div style="margin-bottom: 20px" class="col-md-4">
                         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal2">Agregar</button>
                     </div>
-                    <div class="col-md-4">
+                    <div style="margin-bottom: 20px" class="col-md-4">
                         <a href="ModalModificar.jsp" >
                             <button type="button" class="btn btn-primary btn-lg">Modificar/Eliminar</button>
                         </a>
@@ -281,7 +281,7 @@
                 </div>
             </div>
 
-<<<<<<< HEAD
+
 
             <!-- Modal 3 -->
             <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="modal2Label" aria-hidden="true">
@@ -421,13 +421,6 @@
                 </div>
             </div>
 
-
-
-
-
-
-=======
->>>>>>> desarrollo1
         </section>
 
         <!-- footer-copyright start -->
@@ -443,18 +436,6 @@
                         </div>
                         <!--/.foot-copyright-->
                     </div>
-                    <!--/.col-->
-                    <div class="col-sm-5">
-                        <div class="foot-menu pull-right
-                             ">
-                            <ul>
-                                <li><a href="#">legal</a></li>
-                                <li><a href="#">sitemap</a></li>
-                                <li><a href="#">privacy policy</a></li>
-                            </ul>
-                        </div><!-- /.foot-menu-->
-                    </div>
-                    <!--/.col-->
                 </div>
                 <!--/.row-->
                 <div id="scroll-Top">

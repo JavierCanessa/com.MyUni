@@ -44,7 +44,7 @@ public class Cliente {
     private String fechaNacimiento;
     private long celular;
     private String email;
-    private long pasaporte;
+    private String pasaporte;
     private String portafolio;
 
     @ElementCollection(targetClass = Proceso.class, fetch = FetchType.EAGER)
@@ -63,7 +63,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String foto, String nombres, String apellidos, String ciudad, String fechaNacimiento, long celular, String email, long pasaporte, List<Proceso> procesos) {
+    public Cliente(String foto, String nombres, String apellidos, String ciudad, String fechaNacimiento, long celular, String email, String pasaporte, List<Proceso> procesos) {
         this.foto = foto;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -75,7 +75,7 @@ public class Cliente {
         this.procesos = procesos;
     }
 
-    public Cliente(String foto, String nombres, String apellidos, String ciudad, String fechaNacimiento, long celular, String email, long pasaporte, String portafolio, List<Proceso> procesos) {
+    public Cliente(String foto, String nombres, String apellidos, String ciudad, String fechaNacimiento, long celular, String email, String pasaporte, String portafolio, List<Proceso> procesos) {
         this.foto = foto;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -146,11 +146,11 @@ public class Cliente {
         this.email = email;
     }
 
-    public long getPasaporte() {
+    public String getPasaporte() {
         return pasaporte;
     }
 
-    public void setPasaporte(long pasaporte) {
+    public void setPasaporte(String pasaporte) {
         this.pasaporte = pasaporte;
     }
 

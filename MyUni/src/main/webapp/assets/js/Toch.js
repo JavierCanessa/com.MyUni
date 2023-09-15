@@ -28,23 +28,9 @@ function validarEmail() {
     }
 }
 
-// Función para validar el campo de pasaporte
-function validarPasaporte() {
-    const pasaporteInput = document.getElementById('pasaporte');
-    const pasaporteValue = pasaporteInput.value;
-    const pasaporteRegex = /^[0-9]+$/;
-
-    if (!pasaporteRegex.test(pasaporteValue)) {
-        pasaporteInput.setCustomValidity('Ingrese solo números');
-    } else {
-        pasaporteInput.setCustomValidity('');
-    }
-}
-
 // Event listeners para los campos de celular, email y pasaporte
 document.getElementById('celular').addEventListener('input', validarCelular);
 document.getElementById('email').addEventListener('input', validarEmail);
-document.getElementById('pasaporte').addEventListener('input', validarPasaporte);
 
 
 
@@ -57,7 +43,7 @@ function limpiarFormulario() {
     var fechaNacimientoInput = document.getElementById('fechaNacimiento');
     var celularInput = document.getElementById('celular');
     var emailInput = document.getElementById('email');
-    var pasaporteInput = document.getElementById('pasaporte');
+    var pasaporteInput = document.getElementById('pasaporte1');
 
     // Limpiar los valores de los campos del formulario
     fotoInput.value = '';

@@ -148,9 +148,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="pasaporte">Pasaporte:</label>
-                                <input type="text" class="form-control" style="font-size: 25px;" id="pasaporte" name="pasaporte" required pattern="[0-9]+" >
-                                <small class="form-text text-muted">Ingrese solo números.</small>
-                            </div>
+                                <input type="text" class="form-control" style="font-size: 25px;" id="pasaporte" name="pasaporte" required>
                             <div class="form-group">
                                 <label for="portafolio">Portafolio:</label>
                                 <input type="text" class="form-control" style="font-size: 25px;" id="portafolio" name="portafolio" >

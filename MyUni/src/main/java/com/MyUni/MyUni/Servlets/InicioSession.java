@@ -85,7 +85,7 @@ public class InicioSession extends HttpServlet {
             String user = request.getParameter("user");
             String pass = request.getParameter("pass");
             if (user != null && pass != null
-                    && user.equalsIgnoreCase("unistudent") && pass.equalsIgnoreCase("danielgael")) {
+                    && user.equalsIgnoreCase("unistudentgaeldaniel2023") && pass.equalsIgnoreCase("myuniasesoria422")) {
                 session.setAttribute("session", true);
                 session.setAttribute("user", user);
                 response.sendRedirect("ingresoadmin.jsp");

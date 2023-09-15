@@ -79,7 +79,7 @@ public class ClienteController {
             String fechaNacimiento = cliente.getFechaNacimiento();
             long celular = cliente.getCelular();
             String email = cliente.getEmail();
-            long pasaporte = cliente.getPasaporte();
+            String pasaporte = cliente.getPasaporte();
 
             List<Proceso> listaProcesos = new ArrayList<>();
 

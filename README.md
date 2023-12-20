@@ -1,8 +1,8 @@
-# Unistudent Asesoría Estudiantil - Web App
+# My Uni - Web App
 
 ## Descripción del Proyecto
 
-La Web App de Unistudent Asesoría Estudiantil se integra a la landing page, proporcionando un sistema robusto de gestión de datos para clientes. La aplicación realiza un CRUD de datos con generación automática de códigos únicos para cada cliente. Este código permite a los clientes realizar consultas de datos sin posibilidad de modificarlos, garantizando la seguridad y privacidad de la información.
+La Web App "My Uni" se integra a la landing page de Unistudent Asesoría Estudiantil , proporcionando un sistema robusto de gestión de datos para clientes. La aplicación realiza un CRUD de datos con generación automática de códigos únicos para cada cliente. Este código permite a los clientes realizar consultas de datos sin posibilidad de modificarlos, garantizando la seguridad y privacidad de la información.
 
 ## Tecnologías Utilizadas
 
